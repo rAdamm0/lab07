@@ -1,8 +1,6 @@
-##Ignore the files that have the *.class subfix
+##Ignore all the files that have the .class subfix
 *.class
-
-##Ignore the files/folders that have the gradle subfix 
-*/.gradle
-
-##Ignore the folders with the classes
+##Ignore all the files/folders that contain gradle files
+*.gradle
+##Ignore every built file 
 */build
