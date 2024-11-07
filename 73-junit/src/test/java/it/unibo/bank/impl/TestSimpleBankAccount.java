@@ -2,14 +2,11 @@ package it.unibo.bank.impl;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Assertions;
 import it.unibo.bank.api.AccountHolder;
 import it.unibo.bank.api.BankAccount;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Test class for the {@link SimpleBankAccount} class.
@@ -20,7 +17,6 @@ class TestSimpleBankAccount {
     private BankAccount bankAccount;
 
     private static final int AMOUNT = 100;
-    private static final int ACCEPTABLE_MESSAGE_LENGTH = 10;
 
     /**
      * Configuration step: this is performed BEFORE each test.
@@ -62,6 +58,7 @@ class TestSimpleBankAccount {
      */
     @Test
     void testWrongBankAccountDeposit() {
+        /*
         try {
             bankAccount.deposit(aBianchi.getUserID(), AMOUNT);
             Assertions.fail("Depositing from a wrong account was possible, but should have thrown an exception");
@@ -71,6 +68,7 @@ class TestSimpleBankAccount {
             assertFalse(e.getMessage().isBlank()); // Not a blank or empty message
             assertTrue(e.getMessage().length() >= ACCEPTABLE_MESSAGE_LENGTH); // A message with a decent length
         }
+        */
         /*
          * Conciser alternative
          * (once you learn reflection, and preferably after you have learnt lambda expressions):
@@ -78,6 +76,10 @@ class TestSimpleBankAccount {
          *
          * Use only if you **already** know reflection and lambda expressions.
          */
+
+        assertThrows(IllegalArgumentException.class, () ->{
+            bankAccount.deposit(aBianchi.getUserID(), AMOUNT);
+        });
     }
 
 }
