@@ -54,7 +54,11 @@ public final class Transformers {
      * @param <O> output elements type
      */
     public static <I, O> List<O> transform(final Iterable<I> base, final Function<I, O> transformer) {
-        return null;
+        final var novo = new ArrayList<O>();
+        for(I k : base){
+            novo.addAll(List.of(transformer.call(k)));
+        }
+        return novo;
     }
 
     /**
@@ -70,7 +74,13 @@ public final class Transformers {
      * @param <I> type of the collection elements
      */
     public static <I> List<? extends I> flatten(final Iterable<? extends Collection<? extends I>> base) {
-        return null;
+        List<I> result = new ArrayList<>();
+        for(Collection<? extends I> k : base){
+            for (I j : k){
+                result.add(j);
+            }
+        }
+        return result;
     }
 
     /**
@@ -87,7 +97,13 @@ public final class Transformers {
      * @param <I> elements type
      */
     public static <I> List<I> select(final Iterable<I> base, final Function<I, Boolean> test) {
-        return null;
+        List<I> result = new ArrayList<>();
+        for(I k : base){
+            if(test.call(k)){
+                result.add(k);
+            }
+        }
+        return result;
     }
 
     /**
@@ -103,6 +119,14 @@ public final class Transformers {
      * @param <I> elements type
      */
     public static <I> List<I> reject(final Iterable<I> base, final Function<I, Boolean> test) {
-        return null;
+        Function<I, Boolean> test1 = new Function<I,Boolean>() {
+
+            @Override
+            public Boolean call(I input) {
+               return !test.call(input);
+            }
+            
+        };
+        return select(base, test1);
     }
 }

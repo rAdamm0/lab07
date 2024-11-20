@@ -8,6 +8,7 @@ package it.unibo.functional.api;
  */
 public interface Function<I, O> {
 
+
     /**
      * Calls the function.
      *
@@ -23,7 +24,14 @@ public interface Function<I, O> {
      * @param <T> the input (and output) type of the function
      */
     static <T> Function<T, T> identity() {
-        return null;
-    }
+        return new Function<T,T>() {
 
+            @Override
+            public T call(T input) {
+                return input;    
+            }
+            
+        };
+    } 
+    /*It has to be a method beacause fields are not allowed to have generic types */
 }
